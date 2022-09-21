@@ -4,11 +4,11 @@
 
 <div class="container add-todo-box-container">
   <div class="add-todo-box">
-    <form #form="ngForm" (ngSubmit)="onFormSubmit(form)">
+    <form [formGroup]="todoForm" (submit)="onFormSubmit(todoForm)">
       <h2 class="title is-5">New Todo</h2>
       <div class="field is-grouped" style="margin:0">
         <p class="control is-expanded">
-          <input ngModel #todoTextField="ngModel" required minlength="2" name="text" class="input" type="text" placeholder="Type todo text here ...">
+          <input name="text" formControlName="text" class="input" type="text" placeholder="Type todo text here ...">
         </p>
         <p class="control">
           <button type="submit" class="button alt-gradient-button">
@@ -17,9 +17,9 @@
           </button>
         </p>
       </div>
-      <div *ngIf="todoTextField.invalid && showValidationErros">
-        <p class="help is-danger" *ngIf="todoTextField.errors?.['required']">Please enter the text of your Todo</p>
-        <p class="help is-danger" *ngIf="todoTextField.errors?.['minlength']">Todo Test must be Atleast 2 characters</p>
+      <div *ngIf="todoForm.invalid && showValidationErros">
+        <p class="help is-danger" *ngIf="todoForm.get('text')?.errors?.['required']">Please enter the text of your Todo</p>
+        <p class="help is-danger" *ngIf="todoForm.get('text')?.errors?.['minlength']">Todo Test must be Atleast 2 characters</p>
       </div>
     </form>
   </div>
@@ -31,5 +31,4 @@
       <app-todo-item *ngFor="let todo of todos" [todo]="todo" (todoClicked)="toggleCompleted(todo)" (editClicked)="onEditClicked(todo)" (deleteClicked)="onDeleteClicked(todo)"></app-todo-item>
     </div>
   </div>
-
 </section>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { EditTodoDialogComponent } from '../edit-todo-dialog/edit-todo-dialog.component';
 import { DataService } from '../shared/data.service';
@@ -13,14 +13,17 @@ import { Todo } from '../shared/todo.model';
 export class TodosComponent implements OnInit {
   todos?: Todo[];
   showValidationErros?: boolean;
+  todoForm = this.fb.group({
+    text: ['', [Validators.required, Validators.minLength(2)]]
+  });
 
-  constructor(private dataService: DataService, private dialog: MatDialog) {}
+  constructor(private dataService: DataService, private dialog: MatDialog, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.todos = this.dataService.getAllTodos();
   }
 
-  onFormSubmit(form: NgForm) {
+  onFormSubmit(form: FormGroup) {
     if (!form.valid) {
      this.showValidationErros = true;
      return;

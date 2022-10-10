@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
+import { ApiService } from '../api.service';
 import { EditTodoDialogComponent } from '../edit-todo-dialog/edit-todo-dialog.component';
 import { DataService } from '../shared/data.service';
 import { Todo } from '../shared/todo.model';
@@ -13,14 +15,16 @@ import { Todo } from '../shared/todo.model';
 export class TodosComponent implements OnInit {
   todos?: Todo[];
   showValidationErros?: boolean;
+  todoList? :Observable<Todo[]>;
   todoForm = this.fb.group({
     text: ['', [Validators.required, Validators.minLength(2)]]
   });
 
-  constructor(private dataService: DataService, private dialog: MatDialog, private fb: FormBuilder) {}
+  constructor(private dataService: DataService, private dialog: MatDialog, private fb: FormBuilder, private apiService: ApiService) {}
 
   ngOnInit(): void {
     this.todos = this.dataService.getAllTodos();
+    this.todoList = this.apiService.fetchPost() as Observable<Todo[]>;
   }
 
   onFormSubmit(form: FormGroup) {
@@ -28,8 +32,9 @@ export class TodosComponent implements OnInit {
      this.showValidationErros = true;
      return;
     };
-    this.dataService.addTodo(new Todo(form.value.text));
+    //this.dataService.addTodo(new Todo(form.value.text));
     this.showValidationErros = false;
+    this.apiService.onCreatePost(new Todo(form.value.text));
     form.reset();
   }
 

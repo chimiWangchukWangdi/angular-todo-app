@@ -4,14 +4,6 @@
 
 export const environment = {
   production: false,
-  firebase: {
-    apiKey: "AIzaSyAeLaLRJtOl_Yc-4OPIqYiFLJuWwBOk5_M",
-    authDomain: "angular-todo-app-957d5.firebaseapp.com",
-    projectId: "angular-todo-app-957d5",
-    storageBucket: "angular-todo-app-957d5.appspot.com",
-    messagingSenderId: "585858727363",
-    appId: "1:585858727363:web:b12d3826676fb2a8579176"
-  }
 };
 
 /*

@@ -10,6 +10,9 @@ import { TodosComponent } from './todos/todos.component';
 import { TodoItemComponent } from './todo-item/todo-item.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditTodoDialogComponent } from './edit-todo-dialog/edit-todo-dialog.component';
+import { LoginComponent } from './login/login.component';
+import { AuthenticationService } from './authentication.service';
+import { AuthenticationInterceptor } from './authentication.interceptor';
 
 
 @NgModule({
@@ -28,7 +31,7 @@ import { EditTodoDialogComponent } from './edit-todo-dialog/edit-todo-dialog.com
     MatDialogModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [AuthenticationInterceptor],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

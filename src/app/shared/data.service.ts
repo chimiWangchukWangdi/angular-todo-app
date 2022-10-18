@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ApiService } from '../api.service';
 import { Todo } from './todo.model';
 
 @Injectable({
@@ -11,18 +12,18 @@ export class DataService {
     new Todo('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', true)
   ];
 
-  constructor() { }
+  constructor(private apiService: ApiService) { }
 
   getAllTodos() {
-    return this.todos;
+    this.apiService.fetchPost();
   };
 
   addTodo(todo: Todo) {
     return this.todos.push(todo);
   };
 
-  updateTodo(index: number, updatedTodo: Todo) {
-    this.todos[index] = updatedTodo;
+  updateTodo(index: string, updatedTodo: Todo) {
+    this.apiService.updatePost(index, updatedTodo).subscribe;
   };
 
   deleteTodo(index: number) {

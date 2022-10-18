@@ -28,7 +28,7 @@
 <section class="section">
   <div class="container">
     <div class="todos-list">
-      <app-todo-item *ngFor="let todo of todoList | async" [todo]="todo" (todoClicked)="toggleCompleted(todo)" (editClicked)="onEditClicked(todo)" (deleteClicked)="onDeleteClicked(todo)"></app-todo-item>
+      <app-todo-item *ngFor="let todo of todoList | async" [todo]="todo" (todoClicked)="toggleCompleted(todo)" (editClicked)="onEditClicked(todo)" (deleteClicked)="onClearPosts(todo)"></app-todo-item>
     </div>
   </div>
 </section>

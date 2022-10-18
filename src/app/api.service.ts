@@ -19,23 +19,37 @@ export class ApiService {
         'https://angular-todo-app-b0176-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json',
         postData
       )
-      .subscribe((response) => {
-
-      });
+      .subscribe((response) => {});
   }
 
-  fetchPost() : Observable<postArray[]> {
-   return this.http.get('https://angular-todo-app-b0176-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json')
-    .pipe(
-      map((responseData: any) => {
-        const postArray = [];
-        for(const key in responseData){
-          if(responseData.hasOwnProperty(key)) {
-            postArray.push({ ...responseData[key], id: key })
+  fetchPost(): Observable<postArray[]> {
+    return this.http
+      .get(
+        'https://angular-todo-app-b0176-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json'
+      )
+      .pipe(
+        map((responseData: any) => {
+          const postArray = [];
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              postArray.push({ ...responseData[key], id: key });
+            }
           }
-        }
-        return postArray;
-      })
-    )
+          return postArray;
+        })
+      );
+  }
+
+  updatePost(index: any, result: any): Observable<any> {
+    console.log('this is updatePost');
+    const url =
+      'https://angular-todo-app-b0176-default-rtdb.asia-southeast1.firebasedatabase.app/posts/';
+    return this.http.put(url + index + '.json', result);
+  }
+
+  deletePosts(id: string) {
+    const url =
+      'https://angular-todo-app-b0176-default-rtdb.asia-southeast1.firebasedatabase.app/posts/';
+    return this.http.delete(url + id + '.json');
   }
 }

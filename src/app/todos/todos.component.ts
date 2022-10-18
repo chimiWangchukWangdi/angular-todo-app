@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
+import { ApiService } from '../api.service';
 import { EditTodoDialogComponent } from '../edit-todo-dialog/edit-todo-dialog.component';
 import { DataService } from '../shared/data.service';
 import { Todo } from '../shared/todo.model';
@@ -12,21 +14,28 @@ import { Todo } from '../shared/todo.model';
 })
 export class TodosComponent implements OnInit {
   todos?: Todo[];
+  todo?: Todo[];
   showValidationErros?: boolean;
+  todoList? :Observable<Todo[]>;
+  todoForm = this.fb.group({
+    text: ['', [Validators.required, Validators.minLength(2)]]
+  });
 
-  constructor(private dataService: DataService, private dialog: MatDialog) {}
+  constructor(private dataService: DataService, private dialog: MatDialog, private fb: FormBuilder, private apiService: ApiService) {}
 
   ngOnInit(): void {
-    this.todos = this.dataService.getAllTodos();
+    this.todos = this.dataService.getAllTodos()!;
+    this.todoList = this.apiService.fetchPost() as Observable<Todo[]>;
   }
 
-  onFormSubmit(form: NgForm) {
+  onFormSubmit(form: FormGroup) {
     if (!form.valid) {
      this.showValidationErros = true;
      return;
     };
-    this.dataService.addTodo(new Todo(form.value.text));
+    //this.dataService.addTodo(new Todo(form.value.text));
     this.showValidationErros = false;
+    this.apiService.onCreatePost(new Todo(form.value.text));
     form.reset();
   }
 
@@ -35,7 +44,8 @@ export class TodosComponent implements OnInit {
   }
 
   onEditClicked(todo: Todo) {
-    const index: number = this.todos?.indexOf(todo)!
+    const index: string = todo.id!;
+    console.log(todo);
 
     let dialogRef = this.dialog.open(EditTodoDialogComponent, {
       width: '600px',
@@ -44,13 +54,23 @@ export class TodosComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if(result) {
-        this.dataService.updateTodo(index, result);
+        this.apiService.updatePost(index, result).subscribe((response) => {
+          console.log(response);
+        });
       };
     })
   }
 
-  onDeleteClicked(todo: Todo) {
+  onClearPosts(todo: Todo) {
+    var index: string = todo.id!
+    console.log(index)
+    this.apiService.deletePosts(index).subscribe(() => {
+      // index = [] as unknown as string;
+    })
+  }
+
+  /* onDeleteClicked(todo: Todo) {
     const index = this.todos?.indexOf(todo);
     this.dataService.deleteTodo(index!);
-  }
+  } */
 }

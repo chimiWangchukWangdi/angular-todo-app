@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ApiService } from '../api.service';
+import { AuthenticationService } from '../authentication.service';
 import { EditTodoDialogComponent } from '../edit-todo-dialog/edit-todo-dialog.component';
 import { DataService } from '../shared/data.service';
 import { Todo } from '../shared/todo.model';
@@ -21,7 +23,7 @@ export class TodosComponent implements OnInit {
     text: ['', [Validators.required, Validators.minLength(2)]]
   });
 
-  constructor(private dataService: DataService, private dialog: MatDialog, private fb: FormBuilder, private apiService: ApiService) {}
+  constructor(private dataService: DataService, private dialog: MatDialog, private fb: FormBuilder, private apiService: ApiService, private authenticationService: AuthenticationService, private router: Router) {}
 
   ngOnInit(): void {
     this.todos = this.dataService.getAllTodos()!;
@@ -67,6 +69,11 @@ export class TodosComponent implements OnInit {
     this.apiService.deletePosts(index).subscribe(() => {
       // index = [] as unknown as string;
     })
+  }
+
+  logout() {
+    this.authenticationService.logout();
+    this.router.navigateByUrl("/");
   }
 
   /* onDeleteClicked(todo: Todo) {

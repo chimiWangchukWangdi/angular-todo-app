@@ -15,11 +15,14 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    debugger
   }
 
   logout(): void {
+    debugger
     this.authService.logout();
-    this.router.navigateByUrl("/login");
+    debugger
+    this.router.navigateByUrl("/");
   }
 
 }

@@ -1,3 +1,4 @@
+import { formatCurrency } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    debugger
   }
 
   get usernameControl(): FormControl {
@@ -30,11 +32,12 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('password') as FormControl;
   }
 
-  login(): void {
+  login(loginForm: FormGroup): void {
     debugger
-    let username = this.loginForm.get('username')?.value;
-    let password = this.loginForm.get('password')?.value;
-    this.authenticationService.login(username!, password as unknown as string).subscribe(() => this.router.navigateByUrl("/"));
+    let username = loginForm.get('username')?.value;
+    let password = loginForm.get('password')?.value;
+    this.authenticationService.login(username!, password as unknown as string).subscribe();
+    loginForm.reset;
   }
 
 }

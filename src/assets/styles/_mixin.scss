@@ -1,0 +1,97 @@
+@import "./variables";
+
+//font-size
+@mixin font-size($font-size) {
+  @each $size in $font-size {
+    .font-size-#{$size} {
+      font-size:#{$size}px !important;
+    }
+  }
+}
+
+//colors
+@mixin try-colors() {
+  $colors: (blue-color, red-color, white-color, green-color, yellow-color, gray-color, primary-color, purple-color, light-grey, gray-white);
+  $assign-colors: (
+    'gray-white': $gray-white,
+    'blue-color': $blue-color,
+    'red-color': $red-color,
+    'white-color': $white,
+    'green-color': $green-color,
+    'yellow-color': $yellow,
+    'gray-color': $gray,
+    'primary-color': $primary,
+    'purple-color': $purple-color,
+    'light-grey': $light-grey,
+  );
+
+  @each $color in $colors {
+    $mapped-color: map-get($assign-colors, $color);
+    .color--#{$color} {
+      color: $mapped-color;
+    }
+    .bg--#{$color} {
+      background-color: $mapped-color;
+    }
+  }
+}
+
+//margin
+@mixin margins($margins) {
+  @each $margin in $margins {
+    .m-#{$margin} {
+      margin: #{$margin}px !important;
+    }
+    .mt-#{$margin} {
+      margin-top: #{$margin}px !important;
+    }
+    .mr-#{$margin} {
+      margin-right: #{$margin}px !important;
+    }
+    .mb-#{$margin} {
+      margin-bottom: #{$margin}px !important;
+    }
+    .ml-#{$margin} {
+      margin-left: #{$margin}px !important;
+    }
+  }
+}
+
+//padding
+@mixin padding($paddings) {
+  @each $padding in $paddings {
+    .p-#{$padding} {
+      padding: #{$padding}px !important;
+    }
+    .pl-#{$padding} {
+      padding-left: #{$padding}px !important;
+    }
+    .pr-#{$padding} {
+      padding-right: #{$padding}px !important;
+    }
+    .pt-#{$padding} {
+      padding-top: #{$padding}px !important;
+    }
+    .pb-#{$padding} {
+      padding-bottom: #{$padding}px !important;
+    }
+    .px-#{$padding} {
+      padding-left: #{$padding}px !important;
+      padding-right: #{$padding}px !important;
+    }
+    .py-#{$padding} {
+      padding-top: #{$padding}px !important;
+      padding-bottom: #{$padding}px !important;
+    }
+  }
+}
+
+//border
+@mixin border-radius($border-radius) {
+  @each $value in $border-radius {
+    .br-#{$value} {
+      border-radius: #{$value}px !important;
+    }
+  }
+
+}

@@ -1,0 +1,52 @@
+@import "variables";
+
+.cursor--pointer {
+  cursor: pointer;
+}
+.card--shadow {
+  margin: 28px 10px 20px;
+  border-radius: 4px;
+  background-color: $white;
+  box-shadow: 0 16px 38px -12px rgba(0, 0, 0, .56), 0 4px 25px 0 rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .2);
+}
+.color--white{
+  color: $white;
+}
+.color--gray{
+  color: $gray;
+}
+.color--light-grey{
+  color: $light-grey;
+}
+.color--yellow{
+  color: $yellow;
+}
+.bg--gray{
+  background-color: $gray;
+}
+.bg--yellow{
+  background-color: $yellow;
+}
+.bg--purple{
+  background-color: $purple-color;
+}
+.bg--gray-white{
+  background-color: $gray-white;
+}
+.bg--red{
+  background-color: $red-color;
+}
+.button--design{
+  border: none;
+  font-weight: 300;
+}
+
+.min-height {
+  min-height: 100vh;
+}
+.p-16{
+  padding: 16px 0 0 16px;
+}
+.font--lighter{
+  font-weight: lighter;
+}

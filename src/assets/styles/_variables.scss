@@ -1,0 +1,19 @@
+$primary: #0166B3;
+$white: #FFFFFF;
+$black-color: #000000;
+$light-grey: #DADADA;
+$gray-white: #EEEEEE;
+$blue-color: #11B8CC;
+$gray: #A4A29E;
+$green-color: #5CB460;
+$red-color: #ED4D49;
+$purple-color: #BC6EC9;
+$yellow: #FEA11E;
+$colors: ($white, $black-color, $blue-color, $gray, $green-color, $yellow, $primary, $red-color, $light-grey, $purple-color,$gray-white);
+
+$font-size: (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 24, 26, 28, 30);
+$margins: (0, 2, 4, 6, 8, 10, 12, 14, 16, 20, 24, 28, 30, 36, 60, 100, 308,464,684,880);
+$paddings: (0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 28, 30, 32, 44, 48, 56, 58, 64, 70, 78, 128, 100, 312, 320, 500);
+
+$font-family: sans-serif;
+$border-radius: (0, 4, 6, 8,20, 22);

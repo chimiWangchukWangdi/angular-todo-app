@@ -1,26 +1,22 @@
-.form-signin {
-  width: 100%;
-  max-width: 330px;
-  padding: 15px;
-  margin: auto;
+.signin{
+  background: linear-gradient(to right, rgb(2, 228, 171), rgb(74, 215, 240));
+  width: 50%;
+  height: 50%;
 }
-
-.form-signin .checkbox {
+.form-control{
+  width: 50%;
+  height: 40px;
+}
+label{
   font-weight: 400;
+  font-size: 18px;
+  margin-left: 12px;
 }
-
-.form-signin .form-floating:focus-within {
-  z-index: 2;
+h1{
+  font-weight: 800;
+  font-size: 26px;
 }
-
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+button{
+  width: 20%;
+  height: 44px;
 }

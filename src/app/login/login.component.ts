@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    debugger
   }
 
   get usernameControl(): FormControl {
@@ -33,7 +32,6 @@ export class LoginComponent implements OnInit {
   }
 
   login(loginForm: FormGroup): void {
-    debugger
     let username = loginForm.get('username')?.value;
     let password = loginForm.get('password')?.value;
     this.authenticationService.login(username!, password as unknown as string).subscribe();

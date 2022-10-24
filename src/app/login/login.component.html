@@ -1,21 +1,21 @@
-<main class="form-signin">
-  <form [formGroup]="loginForm">
-      <h1 class="h3 mb-3 fw-normal">Sign In</h1>
-      <div class="form-floating">
-          <input type="email" class="form-control" id="floatingInput" formControlName="username">
+<main class="signin ml-464 bg--gray card--shadow ">
+  <form [formGroup]="loginForm" class="pl-320 pt-128">
+      <h1>Sign In</h1>
+      <div class="fxFlex fxLayoutAlign=' center' fxLayoutGap='18px' mb-8 mr-8" >
+          <input type="email" class="form-control br-4" id="floatingInput" formControlName="username">
           <label for="floatingInput">Username</label>
           <div *ngIf="loginForm.invalid && usernameControl?.touched && usernameControl.errors">
               <span *ngIf="usernameControl.errors['required']">Username is required</span>
               <span *ngIf="usernameControl.errors['email']">Username must be an email</span>
           </div>
       </div>
-      <div class="form-floating">
-          <input type="password" class="form-control" id="floatingPassword"  formControlName="password">
+      <div class="form-floating fxFlex fxLayoutAlign=' center' fxLayoutGap='18px' mb-8 mr-8">
+          <input type="password" class="form-control br-4" id="floatingPassword"  formControlName="password">
           <label for="floatingPassword">Password</label>
           <div *ngIf="loginForm.invalid && passwordControl?.touched && passwordControl.errors">
               <span *ngIf="passwordControl.errors['minlength']">Password must have at least 8 characters</span>
           </div>
       </div>
-      <button class="w-100 btn btn-lg btn-primary" type="button" [disabled]="this.loginForm.invalid" (click)='login(loginForm)'>Sign in</button>
+      <button class="cursor--pointer btn btn-lg btn-primary bg--primary-color color--white-color br-8" type="button" [disabled]="this.loginForm.invalid" (click)='login(loginForm)'>Sign in</button>
   </form>
 </main>

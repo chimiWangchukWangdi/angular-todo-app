@@ -15,7 +15,6 @@ export class AuthenticationService {
   constructor(private router: Router) { }
 
   login(username: string, password: string): Observable<HttpResponse<unknown>> {
-    debugger
     // Mock a successful call to an API server.
     if (username == this.fakeUsername && password == this.fakePassword) {
       localStorage.setItem("token", "my-super-secret-token-from-server");

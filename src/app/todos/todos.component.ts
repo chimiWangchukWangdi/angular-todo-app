@@ -39,6 +39,10 @@ export class TodosComponent implements OnInit {
     this.showValidationErros = false;
     this.apiService.onCreatePost(new Todo(form.value.text));
     form.reset();
+    setTimeout( () => {
+      this.ngOnInit();
+    }, 100)
+
   }
 
   toggleCompleted(todo: Todo) {

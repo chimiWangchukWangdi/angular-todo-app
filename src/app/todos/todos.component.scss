@@ -1,3 +1,13 @@
+.logout{
+  background: linear-gradient(to right, rgb(2, 228, 171), rgb(74, 215, 240));
+  padding: 8px;
+}
+button:hover{
+  color: red;
+  transition: ease-out;
+  font-weight: 600;
+  background-color: white;
+}
 .heading-section {
   background: linear-gradient(to right, rgb(2, 228, 171), rgb(74, 215, 240));
   padding: 100px;

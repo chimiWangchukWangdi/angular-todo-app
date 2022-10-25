@@ -21,8 +21,12 @@ button:hover{
 };
 
 .container {
-  max-width: 800px;
+  max-width: 100%;
 };
+
+.List{
+  height: 60%;
+}
 
 .add-todo-box-container {
   position: sticky;

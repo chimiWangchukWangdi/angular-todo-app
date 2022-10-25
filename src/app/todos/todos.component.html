@@ -1,4 +1,4 @@
-<div class="logout fxLayout='row' fxLayoutAlign='end none'">
+<div fxLayout="row" fxLayoutAlign="end center" class="logout">
   <button class="br-4 font-size-20 color--black-color cursor--pointer mr-4 bg--white-color" (click)="logout()">Logout</button>
 </div>
 <section class="heading-section">
@@ -28,9 +28,12 @@
 </div>
 
 <section class="section">
-  <div class="container">
-    <div class="todos-list">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="40px" class="br-4">
+    <div fxFlex="70" class="todos-list">
       <app-todo-item *ngFor="let todo of todoList | async" [todo]="todo" (todoClicked)="toggleCompleted(todo)" (editClicked)="onEditClicked(todo)" (deleteClicked)="onClearPosts(todo)"></app-todo-item>
+    </div>
+    <div fxFlex="30" class="List bg--gray br-4">
+      <p class="p-78">hello</p>
     </div>
   </div>
 </section>

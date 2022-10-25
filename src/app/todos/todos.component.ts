@@ -3,11 +3,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ApiService } from '../api.service';
+import { ApiService } from '../Services/api.service';
 import { AuthenticationService } from '../authentication.service';
 import { EditTodoDialogComponent } from '../edit-todo-dialog/edit-todo-dialog.component';
 import { DataService } from '../shared/data.service';
 import { Todo } from '../shared/todo.model';
+import { FacadeService } from '../Services/facade.service';
+// import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
   selector: 'app-todos',
@@ -23,21 +25,22 @@ export class TodosComponent implements OnInit {
     text: ['', [Validators.required, Validators.minLength(2)]]
   });
 
-  constructor(private dataService: DataService, private dialog: MatDialog, private fb: FormBuilder, private apiService: ApiService, private authenticationService: AuthenticationService, private router: Router) {}
+  constructor(private facadeService: FacadeService, private dataService: DataService, private dialog: MatDialog, private fb: FormBuilder, private apiService: ApiService, private authenticationService: AuthenticationService, private router: Router) {}
 
   ngOnInit(): void {
     this.todos = this.dataService.getAllTodos()!;
-    this.todoList = this.apiService.fetchPost() as Observable<Todo[]>;
+    this.todoList = this.facadeService.fetchPost() as Observable<Todo[]>;
   }
 
   onFormSubmit(form: FormGroup) {
+    debugger
     if (!form.valid) {
      this.showValidationErros = true;
      return;
     };
     //this.dataService.addTodo(new Todo(form.value.text));
     this.showValidationErros = false;
-    this.apiService.onCreatePost(new Todo(form.value.text));
+    this.facadeService.onCreatePost(new Todo(form.value.text));
     form.reset();
     setTimeout( () => {
       this.ngOnInit();
@@ -60,7 +63,7 @@ export class TodosComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if(result) {
-        this.apiService.updatePost(index, result).subscribe((response) => {
+        this.facadeService.updatePost(index, result).subscribe((response) => {
           console.log(response);
         });
       };
@@ -70,7 +73,7 @@ export class TodosComponent implements OnInit {
   onClearPosts(todo: Todo) {
     var index: string = todo.id!
     console.log(index)
-    this.apiService.deletePosts(index).subscribe(() => {
+    this.facadeService.deletePosts(index).subscribe(() => {
       // index = [] as unknown as string;
     })
   }

@@ -13,6 +13,8 @@ import { EditTodoDialogComponent } from './edit-todo-dialog/edit-todo-dialog.com
 import { LoginComponent } from './login/login.component';
 import { AuthenticationService } from './authentication.service';
 import { AuthenticationInterceptor } from './authentication.interceptor';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 
 @NgModule({
@@ -29,7 +31,8 @@ import { AuthenticationInterceptor } from './authentication.interceptor';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    HttpClientModule
+    HttpClientModule,
+    FlexLayoutModule
   ],
   providers: [AuthenticationInterceptor],
   bootstrap: [AppComponent]

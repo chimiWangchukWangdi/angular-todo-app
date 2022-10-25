@@ -37,6 +37,7 @@ export class TodosComponent implements OnInit {
       if (state) {
           this.todo = state.todo;
       }
+      console.log('this is storeSub', this.storeSub);
     });
     this.getState();
   }
@@ -49,7 +50,7 @@ export class TodosComponent implements OnInit {
     //this.dataService.addTodo(new Todo(form.value.text));
     this.showValidationErros = false;
     this.facadeService.onCreatePost(new Todo(form.value.text));
-    this.stateService.add(new Todo(form.value.text));
+    this.facadeService.add(new Todo(form.value.text));
     form.reset();
     setTimeout( () => {
       this.ngOnInit();
@@ -58,8 +59,11 @@ export class TodosComponent implements OnInit {
 
   }
 
-  toggleCompleted(todo: Todo) {
+  toggleCompleted (todo: Todo) {
     todo.completed = !todo.completed;
+    const index1: string = todo.id!;
+    console.log(todo);
+    this.facadeService.updatePost(index1, todo.completed)
   }
 
   onEditClicked(todo: Todo) {
@@ -90,7 +94,7 @@ export class TodosComponent implements OnInit {
     this.facadeService.deletePosts(index).subscribe(() => {
       // index = [] as unknown as string;
     });
-    this.stateService.remove();
+    this.facadeService.remove();
     setTimeout( () => {
       this.ngOnInit();
       console.log('set timeout - delete');

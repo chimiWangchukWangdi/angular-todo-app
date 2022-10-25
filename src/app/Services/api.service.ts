@@ -40,7 +40,7 @@ export class ApiService {
       );
   }
 
-  updatePost(index: any, result: any): Observable<any> {
+  updatePost(index: any, result: Todo): Observable<any> {
     console.log('this is updatePost');
     const url =
       'https://angular-todo-app-b0176-default-rtdb.asia-southeast1.firebasedatabase.app/posts/';

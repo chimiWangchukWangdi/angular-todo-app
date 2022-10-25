@@ -9,6 +9,7 @@ import { EditTodoDialogComponent } from '../edit-todo-dialog/edit-todo-dialog.co
 import { DataService } from '../shared/data.service';
 import { Todo } from '../shared/todo.model';
 import { FacadeService } from '../Services/facade.service';
+import { StateService } from '../Services/state.service';
 // import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
@@ -18,22 +19,29 @@ import { FacadeService } from '../Services/facade.service';
 })
 export class TodosComponent implements OnInit {
   todos?: Todo[];
-  todo?: Todo[];
+  todo?: Todo;
+  storeSub: any;
+  topThreeList?: Todo[];
   showValidationErros?: boolean;
   todoList? :Observable<Todo[]>;
   todoForm = this.fb.group({
     text: ['', [Validators.required, Validators.minLength(2)]]
   });
 
-  constructor(private facadeService: FacadeService, private dataService: DataService, private dialog: MatDialog, private fb: FormBuilder, private apiService: ApiService, private authenticationService: AuthenticationService, private router: Router) {}
+  constructor(private facadeService: FacadeService, private dataService: DataService, private stateService: StateService, private dialog: MatDialog, private fb: FormBuilder, private apiService: ApiService, private authenticationService: AuthenticationService, private router: Router) {}
 
   ngOnInit(): void {
     this.todos = this.dataService.getAllTodos()!;
     this.todoList = this.facadeService.fetchPost() as Observable<Todo[]>;
+    this.storeSub = this.stateService.stateChanged.subscribe(state => {
+      if (state) {
+          this.todo = state.todo;
+      }
+    });
+    this.getState();
   }
 
   onFormSubmit(form: FormGroup) {
-    debugger
     if (!form.valid) {
      this.showValidationErros = true;
      return;
@@ -41,10 +49,12 @@ export class TodosComponent implements OnInit {
     //this.dataService.addTodo(new Todo(form.value.text));
     this.showValidationErros = false;
     this.facadeService.onCreatePost(new Todo(form.value.text));
+    this.stateService.add(new Todo(form.value.text));
     form.reset();
     setTimeout( () => {
       this.ngOnInit();
-    }, 100)
+      console.log('set timeout - create');
+    }, 100);
 
   }
 
@@ -59,7 +69,7 @@ export class TodosComponent implements OnInit {
     let dialogRef = this.dialog.open(EditTodoDialogComponent, {
       width: '600px',
       data: todo
-    })
+    });
 
     dialogRef.afterClosed().subscribe((result) => {
       if(result) {
@@ -67,15 +77,24 @@ export class TodosComponent implements OnInit {
           console.log(response);
         });
       };
-    })
+      setTimeout( () => {
+        this.ngOnInit();
+        console.log('set timeout - edit');
+      }, 100);
+    });
   }
 
   onClearPosts(todo: Todo) {
     var index: string = todo.id!
-    console.log(index)
+    console.log(index);
     this.facadeService.deletePosts(index).subscribe(() => {
       // index = [] as unknown as string;
-    })
+    });
+    this.stateService.remove();
+    setTimeout( () => {
+      this.ngOnInit();
+      console.log('set timeout - delete');
+    }, 200);
   }
 
   logout() {
@@ -87,4 +106,10 @@ export class TodosComponent implements OnInit {
     const index = this.todos?.indexOf(todo);
     this.dataService.deleteTodo(index!);
   } */
+
+  getState() {
+    this.topThreeList = this.stateService.get();
+    console.log('this is the Top Three List:', this.topThreeList);
+  }
+
 }

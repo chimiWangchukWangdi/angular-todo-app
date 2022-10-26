@@ -6,13 +6,20 @@ export class Todo {
   ) {}
 }
 
+export interface postArray {
+  completed: boolean;
+  text: string;
+}
+
 export interface StoreState {
   todos: Todo[],
-  todo: Todo
+  todo: Todo,
+  completed: boolean
 }
 
 export enum CustomersStoreActions {
-  AddCustomer = 'ADD_TODO',
-  RemoveCustomer = 'REMOVE_TODO',
-  GetCustomers = 'GET_TODOS'
+  AddTodo = 'ADD_TODO',
+  RemoveTodo = 'REMOVE_TODO',
+  GetTodo = 'GET_TODOS',
+  EditTodo = 'EDIT_TODOS'
 }

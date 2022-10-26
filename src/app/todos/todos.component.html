@@ -29,13 +29,22 @@
 
 <section class="section">
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="40px" class="br-4">
-    <div fxFlex="70" class="todos-list">
-      <app-todo-item *ngFor="let todo of todoList | async" [todo]="todo" (todoClicked)="toggleCompleted(todo)" (editClicked)="onEditClicked(todo)" (deleteClicked)="onClearPosts(todo)"></app-todo-item>
+    <div fxFlex="60" class="todos-list">
+      <app-todo-item *ngFor="let todo of (todoList | async)?.reverse()" [todo]="todo" (todoClicked)="toggleCompleted(todo)" (editClicked)="onEditClicked(todo)" (deleteClicked)="onClearPosts(todo)"></app-todo-item>
     </div>
-    <div fxFlex="30" class="List bg--white-color br-4">
-      <!-- <button (click)="getState()">Get the List</button> -->
+    <div fxFlex="40" class="List bg--white-color br-4">
       <h1>Top Three List</h1>
-      <p *ngFor="let one of topThreeList">{{one.text}}</p>
+      <div class="todo-item completed" *ngFor="let todo of topThreeList?.reverse(); let i=index">
+        <div class="todo-item completed" *ngIf="i<3">
+          <div class="check-box" [class.completed]="todo?.completed">
+            <i class="material-icons">check</i>
+           </div>
+
+           <div class="todo-text">
+            {{ todo?.text }}
+           </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>

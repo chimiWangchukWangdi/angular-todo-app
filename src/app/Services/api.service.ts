@@ -1,12 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { Todo } from '../shared/todo.model';
+import { postArray, Todo } from '../shared/todo.model';
 
-interface postArray {
-  completed: boolean;
-  text: string;
-}
 @Injectable({
   providedIn: 'root',
 })
@@ -41,10 +37,10 @@ export class ApiService {
   }
 
   updatePost(index: any, result: Todo): Observable<any> {
-    console.log('this is updatePost');
     const url =
       'https://angular-todo-app-b0176-default-rtdb.asia-southeast1.firebasedatabase.app/posts/';
-    return this.http.put(url + index + '.json', result);
+    return this.http.put(url + index + '.json', result).pipe(
+    );
   }
 
   deletePosts(id: string) {

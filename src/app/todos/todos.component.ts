@@ -7,10 +7,9 @@ import { ApiService } from '../Services/api.service';
 import { AuthenticationService } from '../authentication.service';
 import { EditTodoDialogComponent } from '../edit-todo-dialog/edit-todo-dialog.component';
 import { DataService } from '../shared/data.service';
-import { Todo } from '../shared/todo.model';
+import { postArray, Todo } from '../shared/todo.model';
 import { FacadeService } from '../Services/facade.service';
 import { StateService } from '../Services/state.service';
-// import { FlexLayoutModule } from '@angular/flex-layout';
 
 @Component({
   selector: 'app-todos',
@@ -22,6 +21,7 @@ export class TodosComponent implements OnInit {
   todo?: Todo;
   storeSub: any;
   topThreeList?: Todo[];
+  todolist2?: any;
   showValidationErros?: boolean;
   todoList? :Observable<Todo[]>;
   todoForm = this.fb.group({
@@ -33,12 +33,16 @@ export class TodosComponent implements OnInit {
   ngOnInit(): void {
     this.todos = this.dataService.getAllTodos()!;
     this.todoList = this.facadeService.fetchPost() as Observable<Todo[]>;
-    this.storeSub = this.stateService.stateChanged.subscribe(state => {
-      if (state) {
-          this.todo = state.todo;
-      }
-      console.log('this is storeSub', this.storeSub);
+    this.facadeService.fetchPost().subscribe((response) => {
+      this.todolist2 = response;
+      this.stateService.addTodosToStore(this.todolist2 as unknown as Todo[]);
     });
+
+    // this.storeSub = this.stateService.stateChanged.subscribe(state => {
+    //   if (state) {
+    //       this.todo = state.todo;
+    //   }
+    // });
     this.getState();
   }
 
@@ -54,50 +58,45 @@ export class TodosComponent implements OnInit {
     form.reset();
     setTimeout( () => {
       this.ngOnInit();
-      console.log('set timeout - create');
     }, 100);
-
   }
 
   toggleCompleted (todo: Todo) {
     todo.completed = !todo.completed;
     const index1: string = todo.id!;
-    console.log(todo);
-    this.facadeService.updatePost(index1, todo.completed)
+    this.facadeService.updatePost(index1, todo).subscribe();
+    this.stateService.edit(index1, todo)
   }
 
   onEditClicked(todo: Todo) {
     const index: string = todo.id!;
-    console.log(todo);
 
     let dialogRef = this.dialog.open(EditTodoDialogComponent, {
       width: '600px',
       data: todo
     });
 
+    this.stateService.edit(index, todo);
+
     dialogRef.afterClosed().subscribe((result) => {
       if(result) {
         this.facadeService.updatePost(index, result).subscribe((response) => {
-          console.log(response);
         });
       };
       setTimeout( () => {
         this.ngOnInit();
-        console.log('set timeout - edit');
-      }, 100);
+      }, 500);
     });
   }
 
   onClearPosts(todo: Todo) {
     var index: string = todo.id!
-    console.log(index);
     this.facadeService.deletePosts(index).subscribe(() => {
       // index = [] as unknown as string;
     });
     this.facadeService.remove();
     setTimeout( () => {
       this.ngOnInit();
-      console.log('set timeout - delete');
     }, 200);
   }
 
@@ -113,7 +112,6 @@ export class TodosComponent implements OnInit {
 
   getState() {
     this.topThreeList = this.stateService.get();
-    console.log('this is the Top Three List:', this.topThreeList);
   }
 
 }

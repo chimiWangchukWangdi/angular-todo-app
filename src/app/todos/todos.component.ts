@@ -7,7 +7,7 @@ import { ApiService } from '../Services/api.service';
 import { AuthenticationService } from '../authentication.service';
 import { EditTodoDialogComponent } from '../edit-todo-dialog/edit-todo-dialog.component';
 import { DataService } from '../shared/data.service';
-import { postArray, Todo } from '../shared/todo.model';
+import { Todo } from '../shared/todo.model';
 import { FacadeService } from '../Services/facade.service';
 import { StateService } from '../Services/state.service';
 
@@ -38,12 +38,9 @@ export class TodosComponent implements OnInit {
       this.stateService.addTodosToStore(this.todolist2 as unknown as Todo[]);
     });
 
-    // this.storeSub = this.stateService.stateChanged.subscribe(state => {
-    //   if (state) {
-    //       this.todo = state.todo;
-    //   }
-    // });
-    this.getState();
+    setTimeout( () => {
+      this.getState();
+    }, 100);
   }
 
   onFormSubmit(form: FormGroup) {
@@ -112,6 +109,7 @@ export class TodosComponent implements OnInit {
 
   getState() {
     this.topThreeList = this.stateService.get();
+    console.log('Inside getState()', this.topThreeList);
   }
 
 }

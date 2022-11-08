@@ -4,13 +4,13 @@
 
 export const environment = {
   production: false,
+  firebase: {
+    apiKey: "AIzaSyD56Lv1grqma0QDL_FYTZADStfstF8SLkw",
+    authDomain: "angular-todo-app-b0176.firebaseapp.com",
+    databaseURL: "https://angular-todo-app-b0176-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "angular-todo-app-b0176",
+    storageBucket: "angular-todo-app-b0176.appspot.com",
+    messagingSenderId: "1052120686357",
+    appId: "1:1052120686357:web:44eb13d1d611e5e883d31c"
+  }
 };
-
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.

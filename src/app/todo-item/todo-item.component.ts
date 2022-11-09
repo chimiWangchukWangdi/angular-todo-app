@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { UploadFormComponent } from '../Components/upload-form/upload-form.component';
 import { Todo } from '../shared/todo.model';
 
 @Component({
@@ -12,8 +14,9 @@ export class TodoItemComponent implements OnInit {
 @Output() todoClicked = new EventEmitter<void>();
 @Output() editClicked = new EventEmitter<void>();
 @Output() deleteClicked = new EventEmitter<void>();
+@Output() uploadClicked = new EventEmitter<void>();
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -28,6 +31,22 @@ export class TodoItemComponent implements OnInit {
 
   onDeleteClicked() {
     this.deleteClicked.emit();
+    console.log('delete')
+  }
+
+  onUploadClicked() {
+    this.uploadClicked.emit();
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(UploadFormComponent, {
+      width: '250px',
+      data: {},
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      //this.animal = result;
+    });
   }
 
 }

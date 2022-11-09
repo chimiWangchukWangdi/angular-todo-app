@@ -10,6 +10,7 @@ import { DataService } from '../shared/data.service';
 import { Todo } from '../shared/todo.model';
 import { FacadeService } from '../Services/facade.service';
 import { StateService } from '../Services/state.service';
+import { FileUploadService } from '../Services/file-upload.service';
 
 @Component({
   selector: 'app-todos',
@@ -28,7 +29,7 @@ export class TodosComponent implements OnInit {
     text: ['', [Validators.required, Validators.minLength(2)]]
   });
 
-  constructor(private facadeService: FacadeService, private dataService: DataService, private stateService: StateService, private dialog: MatDialog, private fb: FormBuilder, private apiService: ApiService, private authenticationService: AuthenticationService, private router: Router) {}
+  constructor(private facadeService: FacadeService, private dataService: DataService, private stateService: StateService, private dialog: MatDialog, private fb: FormBuilder, private apiService: ApiService, private authenticationService: AuthenticationService, private router: Router, private fileUploadService: FileUploadService) {}
 
   ngOnInit(): void {
     this.todos = this.dataService.getAllTodos()!;
@@ -95,6 +96,10 @@ export class TodosComponent implements OnInit {
     setTimeout( () => {
       this.ngOnInit();
     }, 200);
+  }
+
+  onUploadImage() {
+   // this.fileUploadService.pushFileToStorage()
   }
 
   logout() {

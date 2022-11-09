@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FileUpload } from 'src/app/models/file-upload.model';
 import { FileUploadService } from 'src/app/Services/file-upload.service';
 
@@ -13,7 +14,8 @@ export class UploadFormComponent implements OnInit {
   currentFileUpload?: FileUpload;
   percentage?: number;
 
-  constructor(private uploadService: FileUploadService) { }
+  constructor(private uploadService: FileUploadService, public dialogRef: MatDialogRef<UploadFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: FileUpload,) { }
 
   ngOnInit(): void {
   }

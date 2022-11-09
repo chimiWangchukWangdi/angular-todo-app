@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -45,7 +45,18 @@ import { UploadDetailsComponent } from './Components/upload-details/upload-detai
     AngularFireDatabaseModule,
     AngularFireStorageModule
   ],
-  providers: [AuthenticationInterceptor],
-  bootstrap: [AppComponent]
+  providers: [
+    AuthenticationInterceptor,
+    MatDialog,
+      {
+      provide: MatDialogRef,
+      useValue: []
+      },
+      {
+      provide: MAT_DIALOG_DATA,
+      useValue: []
+      }
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

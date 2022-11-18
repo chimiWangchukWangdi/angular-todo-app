@@ -1818,6 +1818,27 @@
   resolved "https://registry.npmjs.org/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
+"@ngrx/effects@^14.3.2":
+  version "14.3.2"
+  resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-14.3.2.tgz#a5cc62e78cec2f5ccce810b8d27a58cc91e72c4f"
+  integrity sha512-6bpGfA44jzwhBcmNaTwVgnFmYOX9iKPFpXyetDe41tVESo1CsNhUBPTmISDXKN9Mx2mwGbsMxrn6QFRypSsKAQ==
+  dependencies:
+    tslib "^2.0.0"
+
+"@ngrx/store-devtools@^14.3.2":
+  version "14.3.2"
+  resolved "https://registry.yarnpkg.com/@ngrx/store-devtools/-/store-devtools-14.3.2.tgz#046e53a8e342251ff12606375166833d148ffa5e"
+  integrity sha512-lm1BobiHXzBC3tqYNAghCRNfBdIbs4JyfaTO9wqOEoDCh6COvzGLi7tAo9Zjls1REZC1NiIwSw4vKK8OMc+tfA==
+  dependencies:
+    tslib "^2.0.0"
+
+"@ngrx/store@^14.3.2":
+  version "14.3.2"
+  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-14.3.2.tgz#91333c9c4d7b54bf98d842cb94e6afa3a6ea8df2"
+  integrity sha512-XGHjr0arh6gClo8Ce+xqJLvW9PkeXPW2tCo9Z5qMtHFI/z5dUppLVKGmMgD/fQBDyoqWTK5xu+89tDkdeZfRjQ==
+  dependencies:
+    tslib "^2.0.0"
+
 "@ngtools/webpack@14.2.3":
   version "14.2.3"
   resolved "https://registry.npmjs.org/@ngtools/webpack/-/webpack-14.2.3.tgz"

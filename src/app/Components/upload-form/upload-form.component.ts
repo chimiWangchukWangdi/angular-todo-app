@@ -25,6 +25,7 @@ export class UploadFormComponent implements OnInit {
   }
 
   upload(): void {
+    debugger
     const file = this.selectedFiles!.item(0);
     this.selectedFiles = undefined;
 

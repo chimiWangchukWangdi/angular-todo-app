@@ -21,6 +21,10 @@ import { environment } from 'src/environments/environment';
 import { UploadFormComponent } from './Components/upload-form/upload-form.component';
 import { UploadListComponent } from './Components/upload-list/upload-list.component';
 import { UploadDetailsComponent } from './Components/upload-details/upload-details.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { TodoEffects } from './state/todo.effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -42,8 +46,15 @@ import { UploadDetailsComponent } from './Components/upload-details/upload-detai
     HttpClientModule,
     FlexLayoutModule,
     AngularFireModule.initializeApp(environment.firebase),
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([TodoEffects]),
     AngularFireDatabaseModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+      autoPause: true, // Pauses recording actions and state changes when the extension window is not open
+    }),
   ],
   providers: [
     AuthenticationInterceptor,

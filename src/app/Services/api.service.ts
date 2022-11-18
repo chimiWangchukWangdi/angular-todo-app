@@ -18,7 +18,7 @@ export class ApiService {
       .subscribe((response) => {});
   }
 
-  fetchPost(): Observable<postArray[]> {
+  fetchPost(): Observable<Todo[]> {
     return this.http
       .get(
         'https://angular-todo-app-b0176-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json'

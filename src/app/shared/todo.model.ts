@@ -1,9 +1,8 @@
-export class Todo {
-  constructor(
-    public text: string,
-    public completed: boolean = false,
-    public id?: string
-  ) {}
+export interface Todo {
+     text: string,
+     completed: boolean,
+     id?: string
+
 }
 
 export interface postArray {
@@ -12,9 +11,9 @@ export interface postArray {
 }
 
 export interface StoreState {
-  todos: Todo[],
-  todo: Todo,
-  completed: boolean
+  todos?: Todo[],
+  todo?: Todo,
+  completed?: boolean
 }
 
 export enum CustomersStoreActions {

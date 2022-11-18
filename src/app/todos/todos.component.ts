@@ -32,6 +32,10 @@ export class TodosComponent implements OnInit {
   constructor(private facadeService: FacadeService, private dataService: DataService, private stateService: StateService, private dialog: MatDialog, private fb: FormBuilder, private apiService: ApiService, private authenticationService: AuthenticationService, private router: Router, private fileUploadService: FileUploadService) {}
 
   ngOnInit(): void {
+    this.facadeService.getTodosFromApi();
+    this.facadeService.selectTodo().subscribe(res => {
+      debugger
+    })
     this.todos = this.dataService.getAllTodos()!;
     this.todoList = this.facadeService.fetchPost() as Observable<Todo[]>;
     this.facadeService.fetchPost().subscribe((response) => {
@@ -51,8 +55,8 @@ export class TodosComponent implements OnInit {
     };
     //this.dataService.addTodo(new Todo(form.value.text));
     this.showValidationErros = false;
-    this.facadeService.onCreatePost(new Todo(form.value.text));
-    this.facadeService.add(new Todo(form.value.text));
+    // this.facadeService.onCreatePost(new Todo(form.value.text));
+    // this.facadeService.add(new Todo(form.value.text));
     form.reset();
     setTimeout( () => {
       this.ngOnInit();
